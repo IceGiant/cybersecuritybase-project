@@ -1,6 +1,6 @@
 # Cyber Security Base - Course Project I
 
-**ONLY run this application on a secure network you trust.  This a web application with purposeful vulnerabilities, meant to be exploitable.**
+**ONLY run this application on a secure network you trust.  This a web application with purposeful vulnerabilities, meant to be exploitable (runs by default on port 8080).**
 
 The requirements for this project are to create an application with at least 5 of the [OWASP Top 10](https://www.owasp.org/index.php/Top_10_2013-Top_10) flaws (Check the [Cyber Security Base page](https://cybersecuritybase.github.io/project/) for more details). On starting the application, some data is seeded in the DB, including two users:
 
