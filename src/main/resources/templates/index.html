@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Personal Todo Tracker</title>
+    </head>
+    <body>
+
+        <h1>Personal Todos Tracker</h1>
+
+        <span th:inline="text">Logged in as [[${#httpServletRequest.remoteUser}]]</span>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+
+        <form action="#" th:action="@{/postTodo}" method="POST">
+            <p><label for="day">Day</label>: <input type="text" name="day" id="day"/></p>
+            <p><label for="month">Month</label>: <input type="text" name="month" id="month"/></p>
+
+
+            <p>
+            <label for="category">Category</label>:
+            <input type='text' name="category" id="category" list='listid'>
+            <datalist id='listid'>
+                    <option th:each="category : *{categories}" th:value="${category.name}"></option>
+            </datalist>
+            </input>
+            </p>
+
+
+            <p><label for="note">Note</label>: <input type="text" name="note" id="note"/></p>
+            <input type="text" name="todoListId" id="todoListId" hidden="true" th:value="${todoList.id}"/>
+            <input type="text" name="previousVersion" id="previousVersion" hidden="true"/>
+            <p><input type="submit" value="Add todo" /></p>
+        </form>
+
+        <h3>Accessing list: <span th:text="${todoList.name}"></span></h3>
+
+        <ul>
+            <li th:each="item : ${todos}">
+                <span th:text="${item.note}">Something to do</span>
+                (<span th:text="${item.lowestSubCategory.name}">food</span>)
+                <span th:text="${item.day}">30</span>/<span th:text="${item.month}">12</span>
+                <form th:action="@{/deleteTodo}" th:method="DELETE">
+                    <input type="text" name="id" id="id" th:value="${item.id}" hidden="false"/>
+                    <input type="submit" value="Delete"/>
+                </form>
+            </li>
+        </ul>
+
+        <p></p>
+    </body>
+</html>
